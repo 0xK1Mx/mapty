@@ -6,12 +6,17 @@ class workoutView {
   #inputDuration = document.querySelector('.form__input--duration');
   #inputCadence = document.querySelector('.form__input--cadence');
   #inputElevation = document.querySelector('.form__input--elevation');
+  #btndeleteAll = document.querySelector('.delete-all');
   _data;
 
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
     this.#parentEl.insertAdjacentHTML('beforeend', markup);
+  }
+
+  clear() {
+    this.#parentEl.innerHTML = '';
   }
 
   addHandlerDeleteWorkout(handler) {
@@ -33,6 +38,10 @@ class workoutView {
 
   addHandlerMoveTo(handler) {
     this.#parentEl.addEventListener('click', handler);
+  }
+
+  addHandleDeleteAll(handler) {
+    this.#btndeleteAll.addEventListener('click', handler);
   }
 
   // Get form input values

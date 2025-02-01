@@ -140,7 +140,6 @@ class App {
 
     // Render workout on map as marker
     this._renderWorkoutMarker(workout);
-
     // Render workout on list
     this._renderWorkout(workout);
 
@@ -196,6 +195,17 @@ class App {
     //remove the element from the dom
     workoutEl.remove();
     // containerWorkouts.remove(workoutEl);
+  }
+
+  _deleteAllWorkouts() {
+    // errase all element from the array
+    workoutView.clear();
+    this.#workouts.forEach(workout => {
+      if (workout.marker) {
+        this.#map.removeLayer(workout.marker);
+      }
+    });
+    this.#workouts.splice(0, this.#workouts.length);
   }
 
   _renderWorkout(workout) {
@@ -262,6 +272,7 @@ const init = function () {
   workoutView.addHandlerChangeType(app._toggleElevationField);
   workoutView.addHandlerMoveTo(app._moveToPopup.bind(app));
   workoutView.addHandlerNewWorkout(app._newWorkout.bind(app));
+  workoutView.addHandleDeleteAll(app._deleteAllWorkouts.bind(app));
 };
 
 init();
